@@ -4,9 +4,20 @@ namespace Ksfraser\FrontAccounting\HRM\PayrollCalc\Service;
 use Ksfraser\FrontAccounting\HRM\PayrollCalc\DTO\PayrollDTO;
 use Ksfraser\FrontAccounting\HRM\PayrollCalc\Repository\PayrollRepository;
 use ksfraser\RelatedTo\DTO\RelatedRecordDto;
+/**
+ * @BABOK Related: BR-PC-001
+ * @BABOK Related: BR-PC-002
+ * @BABOK Related: BR-PC-003
+ */
 final class PayrollCalcService {
     private $repo;
+    /**
+     * @BABOK Related: BR-PC-001
+     */
     public function __construct(?PayrollRepository $repo = null) { $this->repo = $repo ?? new PayrollRepository(); }
+    /**
+     * @BABOK Related: BR-PC-002
+     */
     public function resolveById(int $id, ?RelatedRecordDto $dto = null): array {
         $row = $this->repo->findById($id);
         if ($row === null) {
@@ -16,6 +27,9 @@ final class PayrollCalcService {
         $dto = $dto ?? new RelatedRecordDto('payroll', (string) $p->id, 'payroll', (string) $p->id, null);
         return array('dto' => $dto, 'fields' => array('employeeId' => $p->employeeName, 'periodStart' => $p->periodStart, 'periodEnd' => $p->periodEnd, 'grossPay' => $p->grossPay, 'netPay' => $p->netPay, 'status' => $p->status), 'labels' => $this->labelMap(), 'url' => '/modules/ksf_FA_HRM_PayrollCalc/pages/payroll_form.php?action=edit&payroll_id=' . $p->id, 'label' => $p->getDisplayLabel());
     }
+    /**
+     * @BABOK Related: BR-PC-002
+     */
     public function listAll(): array {
         $rows = $this->repo->findAll();
         $results = array();
@@ -36,6 +50,10 @@ final class PayrollCalcService {
      * @param string $periodStart Period start date
      * @param string $periodEnd Period end date
      * @return array Payroll calculation result
+     */
+    /**
+     * @BABOK Related: BR-PC-001
+     * @BABOK Related: BR-PC-003
      */
     public function calculatePayroll(string $employeeId, string $periodStart, string $periodEnd): array {
         // Pull current pay rate via RELATED_TO_FIELDS pattern
@@ -106,7 +124,13 @@ final class PayrollCalcService {
             'time_entry_count' => count($timeEntries),
         );
     }
+    /**
+     * @BABOK Related: BR-PC-002
+     */
     public function fieldMap(): array { return $this->labelMap(); }
+    /**
+     * @BABOK Related: BR-PC-002
+     */
     public function labelMap(): array {
         return array(
             'employeeId' => _('Employee'),

@@ -1,8 +1,14 @@
 <?php
 declare(strict_types=1);
 namespace Ksfraser\FrontAccounting\HRM\PayrollCalc\Repository;
+/**
+ * @BABOK Related: BR-PC-001
+ */
 final class PayrollRepository {
     private string $table = 'hrm_payroll_runs';
+    /**
+     * @BABOK Related: BR-PC-001
+     */
     public function findAll(): array {
         if (!function_exists('db_query') || !defined('TB_PREF')) { return array(); }
         $sql = "SELECT * FROM " . TB_PREF . $this->table . " ORDER BY pay_date DESC, id DESC";
@@ -12,6 +18,9 @@ final class PayrollRepository {
         while (($row = db_fetch_assoc($result)) !== false && $row !== null) { $rows[] = $row; }
         return $rows;
     }
+    /**
+     * @BABOK Related: BR-PC-001
+     */
     public function findById(int $id): ?array {
         if (!function_exists('db_query') || !defined('TB_PREF')) { return null; }
         $sql = "SELECT * FROM " . TB_PREF . $this->table . " WHERE id = " . (int) $id;
@@ -20,6 +29,9 @@ final class PayrollRepository {
         $row = db_fetch_assoc($result);
         return $row === false ? null : $row;
     }
+    /**
+     * @BABOK Related: BR-PC-001
+     */
     public function save(array $data): int {
         if (!function_exists('db_query') || !defined('TB_PREF')) { return 0; }
         $sql = "INSERT INTO " . TB_PREF . $this->table . " (
@@ -38,6 +50,9 @@ final class PayrollRepository {
         db_query($sql, 'Could not save payroll run');
         return db_insert_id();
     }
+    /**
+     * @BABOK Related: BR-PC-001
+     */
     public function update(int $id, array $data): void {
         if (!function_exists('db_query') || !defined('TB_PREF')) { return; }
         $sets = [];
