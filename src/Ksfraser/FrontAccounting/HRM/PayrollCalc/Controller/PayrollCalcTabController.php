@@ -73,6 +73,7 @@ class PayrollCalcTabController extends AbstractTabController
         $th(_('Gross Pay'));
         $th(_('Net Pay'));
         $th(_('Status'));
+        $th(_('Actions'));
         echo '</tr>';
 
         if (empty($rows)) {

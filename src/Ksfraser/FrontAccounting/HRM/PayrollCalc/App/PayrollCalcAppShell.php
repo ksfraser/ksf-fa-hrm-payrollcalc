@@ -14,7 +14,7 @@ class PayrollCalcAppShell extends AbstractAppShell
     {
         parent::__construct('payroll', 'index.php', 'view', 'payroll');
 
-        $this->add_module(_("Payroll Calc"));
+        $this->add_module(_("Payroll"));
 
         $menu = new FAModuleMenu(
             'modules/ksf_FA_HRM_PayrollCalc/index.php',
