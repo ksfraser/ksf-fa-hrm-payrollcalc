@@ -1,4 +1,4 @@
--- ksf_FA_HRM_PayrollCalc: payroll runs
+-- ksf_FA_HRM_PayrollCalc: payroll runs table
 
 CREATE TABLE IF NOT EXISTS `0_hrm_payroll_runs` (
   `id`          INT(11) NOT NULL AUTO_INCREMENT,

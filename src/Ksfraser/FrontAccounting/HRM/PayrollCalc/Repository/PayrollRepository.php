@@ -1,15 +1,13 @@
 <?php
 declare(strict_types=1);
+
 namespace Ksfraser\FrontAccounting\HRM\PayrollCalc\Repository;
-/**
- * @BABOK Related: BR-PC-001
- */
+
 final class PayrollRepository {
     private string $table = 'hrm_payroll_runs';
-    /**
-     * @BABOK Related: BR-PC-001
-     */
-    public function findAll(): array {
+
+    public function findAll(): array
+    {
         if (!function_exists('db_query') || !defined('TB_PREF')) { return array(); }
         $sql = "SELECT * FROM " . TB_PREF . $this->table . " ORDER BY pay_date DESC, id DESC";
         $result = db_query($sql, 'Could not load payroll runs');
@@ -18,9 +16,7 @@ final class PayrollRepository {
         while (($row = db_fetch_assoc($result)) !== false && $row !== null) { $rows[] = $row; }
         return $rows;
     }
-    /**
-     * @BABOK Related: BR-PC-001
-     */
+
     public function findById(int $id): ?array {
         if (!function_exists('db_query') || !defined('TB_PREF')) { return null; }
         $sql = "SELECT * FROM " . TB_PREF . $this->table . " WHERE id = " . (int) $id;
@@ -29,10 +25,9 @@ final class PayrollRepository {
         $row = db_fetch_assoc($result);
         return $row === false ? null : $row;
     }
-    /**
-     * @BABOK Related: BR-PC-001
-     */
-    public function save(array $data): int {
+
+    public function save(array $data): int
+    {
         if (!function_exists('db_query') || !defined('TB_PREF')) { return 0; }
         $sql = "INSERT INTO " . TB_PREF . $this->table . " (
                 employee_id, period_start, period_end, pay_date, gross_pay, total_deductions,
@@ -42,17 +37,15 @@ final class PayrollRepository {
             . $this->escape($data['period_start'] ?? '') . ", "
             . $this->escape($data['period_end'] ?? '') . ", "
             . $this->escape($data['pay_date'] ?? '') . ", "
-            . $this->escape($data['gross_pay'] ?? '0') . ", "
-            . $this->escape($data['total_deductions'] ?? '0') . ", "
-            . $this->escape($data['net_pay'] ?? '0') . ", "
+            . $this->escape($data['gross_pay'] ?? '0.00') . ", "
+            . $this->escape($data['total_deductions'] ?? '0.00') . ", "
+            . $this->escape($data['net_pay'] ?? '0.00') . ", "
             . $this->escape($data['status'] ?? 'Draft') . ", "
             . (isset($data['gl_posted']) ? (int)$data['gl_posted'] : 0) . ")";
         db_query($sql, 'Could not save payroll run');
         return db_insert_id();
     }
-    /**
-     * @BABOK Related: BR-PC-001
-     */
+
     public function update(int $id, array $data): void {
         if (!function_exists('db_query') || !defined('TB_PREF')) { return; }
         $sets = [];
@@ -66,6 +59,7 @@ final class PayrollRepository {
         $sql = "UPDATE " . TB_PREF . $this->table . " SET " . implode(', ', $sets) . " WHERE id = " . (int) $id;
         db_query($sql, 'Could not update payroll run');
     }
+
     private function escape($value): string {
         return function_exists('db_escape') ? db_escape($value) : addslashes((string) $value);
     }

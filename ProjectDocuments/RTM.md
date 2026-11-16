@@ -1,11 +1,8 @@
 # RTM — ksf_FA_HRM_PayrollCalc
 
-**Module:** `ksf_FA_HRM_PayrollCalc`
-**Version:** `1.0.0`
-**Requirement definitions:** `ProjectDocuments/Requirements.md`
+| BR ID | Requirement | Implementing class/method | Test file | Status |
+|-------|-------------|---------------------------|-----------|--------|
+| BR-PC-001 | Payroll calculation engine | PayrollCalcService::calculatePayroll(), PayrollRepository::save() | PayrollDtoTest | Implemented |
+| BR-HB-002 | Resolved DTOs for RelatedTo | PayrollCalcService::fieldMap(), labelMap(), listAll() | PayrollDtoTest | Implemented |
+| BR-PC-003 | PAYROLL_CALC hook | PayrollCalcService::calculatePayroll(), hooks.php PAYROLL_CALC responder | PayrollDtoTest | Implemented |
 
-| BR | Requirement | Implementation | Tests | Status |
-|----|-------------|----------------|-------|--------|
-| BR-PC-001 | Payroll calculation engine | `DTO/PayrollDTO`, `Repository/PayrollRepository`, `Service/PayrollCalcService::calculatePayroll()` | `tests/Unit/PayrollDtoTest.php` | IMPLEMENTED |
-| BR-PC-002 | Resolved DTO for RelatedTo | `Service/PayrollCalcService::resolveById()`, `::listAll()`, `::fieldMap()` | `tests/Unit/PayrollDtoTest.php` | IMPLEMENTED |
-| BR-PC-003 | PAYROLL_CALC hook | `Service/PayrollCalcService::calculatePayroll()`, `hooks.php::PAYROLL_CALC` | `tests/Unit/PayrollDtoTest.php` | IMPLEMENTED |

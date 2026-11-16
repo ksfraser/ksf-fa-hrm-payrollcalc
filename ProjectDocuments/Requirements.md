@@ -31,7 +31,7 @@ Payroll Calc SHALL build resolved display data for RelatedTo display.
 1. Resolved data wraps a `RelatedRecordDto` with resolved fields,
    overridable labels, and a URL.
 2. `fieldMap()` returns the field name => display label mapping.
-3. `listAll()` returns resolved payroll data for summary table display.
+3. `listAll()` SHALL return resolved payroll data for summary table display.
 
 ---
 
