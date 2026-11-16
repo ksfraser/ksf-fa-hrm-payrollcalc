@@ -10,9 +10,7 @@ use ksfraser\RelatedTo\DTO\RelatedRecordDto;
 final class PayrollCalcService {
     private $repo;
 
-    public function __construct(?PayrollRepository $repo = null) {
-        $this->repo = $repo ?? new PayrollRepository();
-    }
+    public function __construct(?PayrollRepository $repo = null) { $this->repo = $repo ?? new PayrollRepository(); }
 
     public function resolveById(int $id, ?RelatedRecordDto $dto = null): array {
         $row = $this->repo->findById($id);
@@ -65,14 +63,6 @@ final class PayrollCalcService {
     public function calculatePayroll(string $employeeId, string $periodStart, string $periodEnd): array {
         $payRateData = array(
             'module' => 'ksf_FA_HRM_PayrollCalc',
-            'type' => 'employee_pay_rate',
-            'fields' => array(),
-        );
-        if (function_exists('hook_invoke_all')) {
-            hook_invoke_all('ksf_FA_HRM_PayRates', 'RELATED_TO_FIELDS', $payRateData);
-        }
-        $payRateData = array(
-            'module' => 'ksf_FA_HRM_PayRates',
             'type' => 'employee_pay_rate',
             'fields' => array(),
         );

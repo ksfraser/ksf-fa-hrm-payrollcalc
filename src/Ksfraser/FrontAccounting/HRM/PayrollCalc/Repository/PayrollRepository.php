@@ -63,4 +63,7 @@ final class PayrollRepository {
     private function escape($value): string {
         return function_exists('db_escape') ? db_escape($value) : addslashes((string) $value);
     }
+    private function intVal($value): int {
+        return (int) $value;
+    }
 }
