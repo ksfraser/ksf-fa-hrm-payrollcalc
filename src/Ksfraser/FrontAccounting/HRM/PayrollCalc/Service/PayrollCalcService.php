@@ -61,15 +61,11 @@ final class PayrollCalcService {
     }
 
     public function calculatePayroll(string $employeeId, string $periodStart, string $periodEnd): array {
-        $payRateData = array(
-            'module' => 'ksf_FA_HRM_PayrollCalc',
-            'type' => 'employee_pay_rate',
-            'fields' => array(),
-        );
+        $queryDto = new RelatedQueryDto('employee_pay_rate', $employeeId);
+        $queryResult = $queryDto;
         if (function_exists('hook_invoke_all')) {
-            hook_invoke_all('ksf_FA_HRM_PayRates', 'RELATED_TO_FIELDS', $payRateData);
+            hook_invoke_all('ksf_FA_HRM_PayRates', 'RELATED_TO_FIELDS', $queryResult);
         }
-
         $rateRepo = new \Ksfraser\FrontAccounting\HRM\PayRates\Repository\PayRateRepository();
         $currentRate = $rateRepo->findCurrentByEmployee($employeeId);
 

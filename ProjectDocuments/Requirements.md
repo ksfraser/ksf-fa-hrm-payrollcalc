@@ -11,9 +11,7 @@
 
 **Status:** IMPLEMENTED
 
-The system SHALL provide `ksf_FA_HRM_PayrollCalc` as the owning module for
-payroll calculation. Uses ref-code cross-referencing to pay rates and time
-entries.
+The system SHALL provide `ksf_FA_HRM_PayrollCalc` as the owning module for payroll calculation.
 
 1. Payroll calculation pulls current pay rate (grade × percentage) from PayRates.
 2. Payroll calculation pulls time entries for the period from TimeTracking.
@@ -30,7 +28,7 @@ Payroll Calc SHALL build resolved display data for RelatedTo display.
 
 1. Resolved data wraps a `RelatedRecordDto` with resolved fields,
    overridable labels, and a URL.
-2. `fieldMap()` returns the field name => display label mapping.
+2. `fieldMap()` SHALL return the field name => display label mapping.
 3. `listAll()` SHALL return resolved payroll data for summary table display.
 
 ---
