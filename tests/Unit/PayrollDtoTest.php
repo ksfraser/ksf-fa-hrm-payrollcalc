@@ -17,6 +17,7 @@ class PayrollDtoTest extends TestCase {
         $array = $dto->toArray();
         $this->assertSame(7, $array['id']);
         $this->assertSame('E123', $array['employee_id']);
+        $this->assertSame('Alice Smith', $array['employee_name']);
         $this->assertSame('3000', $array['gross_pay']);
     }
     public function testFromArrayReconstructs(): void {

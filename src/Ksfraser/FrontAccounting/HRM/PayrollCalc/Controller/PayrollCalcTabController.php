@@ -24,11 +24,11 @@ class PayrollCalcTabController extends AbstractTabController
     protected function getFieldMetadata(): array
     {
         return [
-            'entity'      => 'payroll',
+            'entity'      => 'payrollcalc',
             'table'       => '0_hrm_payroll_runs',
-            'label'       => 'Payroll Run',
+            'label'       => 'Payroll Calculation',
             'labelPlural' => 'Payroll Runs',
-            'hookPrefix'  => 'payroll',
+            'hookPrefix'  => 'payrollcalc',
             'pk'          => 'id',
             'fields'      => [],
             'fk_ddls'   => [],
@@ -73,7 +73,6 @@ class PayrollCalcTabController extends AbstractTabController
         $th(_('Gross Pay'));
         $th(_('Net Pay'));
         $th(_('Status'));
-        $th(_('Actions'));
         echo '</tr>';
 
         if (empty($rows)) {
@@ -103,7 +102,7 @@ class PayrollCalcTabController extends AbstractTabController
         $lhsId = isset($_GET['id']) ? (string) $_GET['id'] : '';
         if ($lhsId === '' || !function_exists('hook_invoke')) return;
 
-        $queryDto = new RelatedQueryDto('payroll', $lhsId);
+        $queryDto = new RelatedQueryDto('payrollcalc', $lhsId);
         $queryResult = $queryDto;
         hook_invoke('ksf_FA_RelatedTo', 'RELATED_TO', $queryResult, null);
 
@@ -116,9 +115,9 @@ class PayrollCalcTabController extends AbstractTabController
             'header_class' => 'related-header',
             'table_class' => 'related-table',
             'table_border' => true,
-            'type_labels' => array('payroll' => _('Payroll Runs')),
+            'type_labels' => array('payrollcalc' => _('Payroll Calculation')),
         ));
-        echo $renderer->renderRelatedRecords('payroll', $lhsId, $queryResult['related'], array(
+        echo $renderer->renderRelatedRecords('payrollcalc', $lhsId, $queryResult['related'], array(
             'css_class' => 'related-records',
             'header_class' => 'related-header',
             'table_class' => 'related-table',

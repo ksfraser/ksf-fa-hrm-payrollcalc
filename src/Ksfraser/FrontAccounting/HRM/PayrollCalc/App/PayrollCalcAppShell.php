@@ -6,15 +6,14 @@ namespace Ksfraser\FrontAccounting\HRM\PayrollCalc\App;
 
 use ksfraser\FrontAccounting\Common\App\AbstractAppShell;
 use ksfraser\FrontAccounting\Common\Menu\FAModuleMenu;
-use Ksfraser\FrontAccounting\HRM\PayrollCalc\Controller\PayrollCalcTabController;
 
 class PayrollCalcAppShell extends AbstractAppShell
 {
     public function __construct()
     {
-        parent::__construct('payroll', 'index.php', 'view', 'payroll');
+        parent::__construct('payrollcalc', 'index.php', 'view', 'payroll');
 
-        $this->add_module(_("Payroll"));
+        $this->add_module(_("Payroll Calculation"));
 
         $menu = new FAModuleMenu(
             'modules/ksf_FA_HRM_PayrollCalc/index.php',
